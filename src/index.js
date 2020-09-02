@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 
 const app = express();
 
-mongoose.connect('mongodb+srv://dbruno:dbruno123@bootcamp.x979p.mongodb.net/Bootcamp?retryWrites=true&w=majority', 
+require('dotenv').config();
+
+mongoose.connect(`mongodb+srv://${process.env.USERDB}:${process.env.PWDDB}@bootcamp.x979p.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`, 
 {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -13,7 +15,7 @@ mongoose.connect('mongodb+srv://dbruno:dbruno123@bootcamp.x979p.mongodb.net/Boot
 app.use(express.json())
 app.use('/account', require('./routes'))
 
-app.listen('3001', () => {
+app.listen(`${process.env.PORT}`, () => {
     try {
         console.log('server funcinando');
     } catch (error) {
